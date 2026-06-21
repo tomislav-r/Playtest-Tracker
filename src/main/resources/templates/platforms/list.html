@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Platforme</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/layout :: header}"></div>
+
+<main class="container">
+
+    <h2>Platforme</h2>
+
+    <p>
+        <a href="/platforms/new">Dodaj novu platformu</a>
+    </p>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Naziv</th>
+            <th>Web stranica</th>
+            <th>Opis</th>
+            <th>Dodatno</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="platform : ${platforms}">
+            <td th:text="${platform.id}"></td>
+            <td th:text="${platform.name}"></td>
+            <td th:text="${platform.website}"></td>
+            <td th:text="${platform.description}"></td>
+            <td class="actions">
+                <a th:href="@{/platforms/{id}/edit(id=${platform.id})}">Uredi</a>
+                <a th:href="@{/platforms/{id}/delete(id=${platform.id})}">Obriši</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+</body>
+</html>

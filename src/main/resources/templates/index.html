@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Playtest Tracker</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/layout :: header}"></div>
+
+<main class="container">
+
+    <h2>Dobrodošli u Playtest Tracker</h2>
+
+    <p>
+        Playtest Tracker je web aplikacija za evidenciju testiranja videoigara.
+        Aplikacija omogućuje spremanje podataka o playtestovima, platformama na kojima su testovi provedeni,
+        vrsti testiranja, statusu, ocjeni i bilješkama.
+    </p>
+
+    <p>
+        Projekt koristi dvije povezane cjeline: <strong>Platforme</strong> i <strong>Playtestove</strong>.
+        Jedna platforma može imati više playtestova, dok svaki playtest pripada jednoj platformi.
+    </p>
+
+    <hr>
+
+    <h3>Glavne funkcionalnosti</h3>
+
+    <ul>
+        <li>Pregled svih playtestova</li>
+        <li>Dodavanje novih playtestova</li>
+        <li>Uređivanje i brisanje playtestova</li>
+        <li>Pregled detalja pojedinog playtesta</li>
+        <li>Pretraga i sortiranje playtestova</li>
+        <li>Upravljanje platformama za testiranje</li>
+    </ul>
+
+    <hr>
+
+    <p>
+        <a href="/playtests">Pregled playtestova</a>
+        |
+        <a href="/playtests/new">Dodaj novi playtest</a>
+        |
+        <a href="/platforms">Pregled platformi</a>
+    </p>
+
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+</body>
+</html>

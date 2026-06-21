@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalji playtesta</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/layout :: header}"></div>
+
+<main class="container">
+
+    <h2>Detalji playtesta</h2>
+
+    <p>
+        <strong>ID:</strong>
+        <span th:text="${playtest.id}"></span>
+    </p>
+
+    <p>
+        <strong>Naziv igre:</strong>
+        <span th:text="${playtest.gameTitle}"></span>
+    </p>
+
+    <p>
+        <strong>Datum testiranja:</strong>
+        <span th:text="${playtest.testDate}"></span>
+    </p>
+
+    <p>
+        <strong>Vrsta testa:</strong>
+        <span th:text="${playtest.testType}"></span>
+    </p>
+
+    <p>
+        <strong>Status:</strong>
+        <span th:text="${playtest.status}"></span>
+    </p>
+
+    <p>
+        <strong>Ocjena:</strong>
+        <span th:text="${playtest.rating}"></span>
+    </p>
+
+    <p>
+        <strong>Platforma:</strong>
+        <span th:text="${playtest.platform.name}"></span>
+    </p>
+
+    <p>
+        <strong>Bilješke:</strong><br>
+        <span th:text="${playtest.notes}"></span>
+    </p>
+
+    <hr>
+
+    <p class="actions">
+        <a th:href="@{/playtests/{id}/edit(id=${playtest.id})}">Uredi</a>
+        <a th:href="@{/playtests/{id}/delete(id=${playtest.id})}">Obriši</a>
+        <a href="/playtests">Natrag na popis</a>
+    </p>
+
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+</body>
+</html>

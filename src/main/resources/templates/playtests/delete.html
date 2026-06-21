@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Brisanje playtesta</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/layout :: header}"></div>
+
+<main class="container">
+
+    <h2>Brisanje playtesta</h2>
+
+    <p>Jesi li siguran da želiš obrisati ovaj playtest?</p>
+
+    <hr>
+
+    <p>
+        <strong>Naziv igre:</strong>
+        <span th:text="${playtest.gameTitle}"></span>
+    </p>
+
+    <p>
+        <strong>Datum testiranja:</strong>
+        <span th:text="${playtest.testDate}"></span>
+    </p>
+
+    <p>
+        <strong>Vrsta testa:</strong>
+        <span th:text="${playtest.testType}"></span>
+    </p>
+
+    <p>
+        <strong>Status:</strong>
+        <span th:text="${playtest.status}"></span>
+    </p>
+
+    <p>
+        <strong>Ocjena:</strong>
+        <span th:text="${playtest.rating}"></span>
+    </p>
+
+    <p>
+        <strong>Platforma:</strong>
+        <span th:text="${playtest.platform.name}"></span>
+    </p>
+
+    <hr>
+
+    <form th:action="@{/playtests/{id}/delete(id=${playtest.id})}" method="post">
+        <button type="submit">Da, obriši</button>
+        <a href="/playtests">Odustani</a>
+    </form>
+
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+</body>
+</html>

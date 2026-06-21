@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Playtestovi</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/layout :: header}"></div>
+
+<main class="container">
+
+    <h2>Playtestovi</h2>
+
+    <form th:action="@{/playtests}" method="get">
+        <div class="form-row">
+            <label for="keyword">Pretraži po nazivu igre:</label>
+            <input type="text" id="keyword" name="keyword" th:value="${keyword}">
+        </div>
+
+        <div class="form-row">
+            <label for="sortBy">Sortiraj po:</label>
+            <select id="sortBy" name="sortBy">
+                <option value="testDate" th:selected="${sortBy == 'testDate'}">Datumu testiranja</option>
+                <option value="gameTitle" th:selected="${sortBy == 'gameTitle'}">Nazivu igre</option>
+                <option value="rating" th:selected="${sortBy == 'rating'}">Ocjeni</option>
+                <option value="status" th:selected="${sortBy == 'status'}">Statusu</option>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label for="direction">Smjer:</label>
+            <select id="direction" name="direction">
+                <option value="desc" th:selected="${direction == 'desc'}">Silazno</option>
+                <option value="asc" th:selected="${direction == 'asc'}">Uzlazno</option>
+            </select>
+        </div>
+
+        <button type="submit">Primijeni</button>
+        <a href="/playtests">Reset</a>
+    </form>
+
+    <p>
+        <a href="/playtests/new">Dodaj novi playtest</a>
+    </p>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Naziv igre</th>
+            <th>Datum testiranja</th>
+            <th>Vrsta testa</th>
+            <th>Status</th>
+            <th>Ocjena</th>
+            <th>Platforma</th>
+            <th>Dodatno</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="playtest : ${playtests}">
+            <td th:text="${playtest.id}"></td>
+            <td th:text="${playtest.gameTitle}"></td>
+            <td th:text="${playtest.testDate}"></td>
+            <td th:text="${playtest.testType}"></td>
+            <td th:text="${playtest.status}"></td>
+            <td th:text="${playtest.rating}"></td>
+            <td th:text="${playtest.platform.name}"></td>
+            <td class="actions">
+                <a th:href="@{/playtests/{id}(id=${playtest.id})}">Detalji</a>
+                <a th:href="@{/playtests/{id}/edit(id=${playtest.id})}">Uredi</a>
+                <a th:href="@{/playtests/{id}/delete(id=${playtest.id})}">Obriši</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+</body>
+</html>

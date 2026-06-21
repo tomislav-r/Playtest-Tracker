@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Uredi playtest</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/layout :: header}"></div>
+
+<main class="container">
+
+    <h2>Uredi playtest</h2>
+
+    <form th:action="@{/playtests/{id}/edit(id=${playtestId})}" th:object="${playtestRequest}" method="post">
+
+        <div class="form-row">
+            <label for="gameTitle">Naziv igre:</label>
+            <input type="text" id="gameTitle" th:field="*{gameTitle}">
+            <p class="error" th:if="${#fields.hasErrors('gameTitle')}" th:errors="*{gameTitle}"></p>
+        </div>
+
+        <div class="form-row">
+            <label for="testDate">Datum testiranja:</label>
+            <input type="date"
+                   id="testDate"
+                   name="testDate"
+                   th:value="${playtestRequest.testDate}">
+            <p class="error" th:if="${#fields.hasErrors('testDate')}" th:errors="*{testDate}"></p>
+        </div>
+
+        <div class="form-row">
+            <label for="testType">Vrsta testa:</label>
+            <input type="text" id="testType" th:field="*{testType}">
+            <p class="error" th:if="${#fields.hasErrors('testType')}" th:errors="*{testType}"></p>
+        </div>
+
+        <div class="form-row">
+            <label for="status">Status:</label>
+            <select id="status" th:field="*{status}">
+                <option value="">-- Odaberi status --</option>
+                <option value="U tijeku">U tijeku</option>
+                <option value="Završeno">Završeno</option>
+                <option value="Čeka feedback">Čeka feedback</option>
+                <option value="Otkazano">Otkazano</option>
+            </select>
+            <p class="error" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></p>
+        </div>
+
+        <div class="form-row">
+            <label for="rating">Ocjena:</label>
+            <input type="number" id="rating" th:field="*{rating}" min="1" max="10">
+            <p class="error" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></p>
+        </div>
+
+        <div class="form-row">
+            <label for="platformId">Platforma:</label>
+            <select id="platformId" th:field="*{platformId}">
+                <option value="">-- Odaberi platformu --</option>
+                <option th:each="platform : ${platforms}"
+                        th:value="${platform.id}"
+                        th:text="${platform.name}">
+                </option>
+            </select>
+            <p class="error" th:if="${#fields.hasErrors('platformId')}" th:errors="*{platformId}"></p>
+        </div>
+
+        <div class="form-row">
+            <label for="notes">Bilješke:</label>
+            <textarea id="notes" th:field="*{notes}"></textarea>
+        </div>
+
+        <button type="submit">Spremi promjene</button>
+        <a href="/playtests">Odustani</a>
+
+    </form>
+
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+</body>
+</html>

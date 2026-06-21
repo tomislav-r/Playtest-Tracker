@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Brisanje platforme</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/layout :: header}"></div>
+
+<main class="container">
+
+    <h2>Brisanje platforme</h2>
+
+    <p>
+        <strong>Naziv:</strong>
+        <span th:text="${platform.name}"></span>
+    </p>
+
+    <p>
+        <strong>Web stranica:</strong>
+        <span th:text="${platform.website}"></span>
+    </p>
+
+    <p>
+        <strong>Opis:</strong>
+        <span th:text="${platform.description}"></span>
+    </p>
+
+    <hr>
+
+    <div th:if="${errorMessage}">
+        <p class="error" th:text="${errorMessage}"></p>
+    </div>
+
+    <div th:if="${playtestCount > 0}">
+        <p class="error">
+            Ovu platformu nije moguće obrisati jer ima
+            <strong th:text="${playtestCount}"></strong>
+            povezanih playtestova.
+        </p>
+
+        <p>
+            Prvo obriši ili premjesti playtestove povezane s ovom platformom.
+        </p>
+
+        <a href="/platforms">Natrag na platforme</a>
+    </div>
+
+    <div th:if="${playtestCount == 0}">
+        <p>Jesi li siguran da želiš obrisati ovu platformu?</p>
+
+        <form th:action="@{/platforms/{id}/delete(id=${platform.id})}" method="post">
+            <button type="submit">Da, obriši</button>
+            <a href="/platforms">Odustani</a>
+        </form>
+    </div>
+
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+</body>
+</html>

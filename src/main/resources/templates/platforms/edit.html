@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Uredi platformu</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/layout :: header}"></div>
+
+<main class="container">
+
+    <h2>Uredi platformu</h2>
+
+    <form th:action="@{/platforms/{id}/edit(id=${platform.id})}" th:object="${platform}" method="post">
+
+        <div class="form-row">
+            <label for="name">Naziv platforme:</label>
+            <input type="text" id="name" th:field="*{name}">
+            <p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+        </div>
+
+        <div class="form-row">
+            <label for="website">Web stranica:</label>
+            <input type="text" id="website" th:field="*{website}" placeholder="https://example.com">
+        </div>
+
+        <div class="form-row">
+            <label for="description">Opis:</label>
+            <textarea id="description" th:field="*{description}"></textarea>
+        </div>
+
+        <button type="submit">Spremi promjene</button>
+        <a href="/platforms">Odustani</a>
+
+    </form>
+
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+</body>
+</html>
